@@ -1,0 +1,69 @@
+@* <div class="header-area">
+    <!-- Header Top -->
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <p>Default welcome msg!</p>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="language-currency-wrapper">
+                        <ul>
+                            <li><a href="#">$ Dollar (US)</a></li>
+                            <li><a href="#"><img src="~/assets/images/icon/la-1.jpg" alt=""> English</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header Bottom -->
+    <div class="header-bottom-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-5 col-5">
+                    <a href="/"><img src="~/assets/images/logo/logo.jpg" alt="Logo"></a>
+                </div>
+                <div class="col-lg-8 d-none d-lg-block">
+                    <div class="main-menu-area text-center">
+                        <nav class="main-navigation">
+                            <ul>
+                                <li class="active"><a href="/">Home</a></li>
+                                <li><a href="/products">Shop</a></li>
+                                <li><a href="/about">About</a></li>
+                                <li><a href="/contact">Contact</a></li>
+
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <li><a href="/cart">Cart</a></li>
+                                    <li><a href="/orders">Orders</a></li>
+                                    @if (User.IsInRole("admin"))
+                                    {
+                                        <li><a href="/admin/products">Admin Products</a></li>
+                                        <li><a href="/admin/categories">Admin Categories</a></li>
+                                        <li><a href="/admin/role/list">Roles</a></li>
+                                        <li><a href="/admin/user/list">Users</a></li>
+                                    }
+                                }
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-7 col-7">
+                    <div class="right-blok-box d-flex">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a href="/account/manage"><i class="icon-user"></i></a>
+                            <a href="/account/logout"><i class="icon-logout"></i></a>
+                        }
+                        else
+                        {
+                            <a href="/account/login"><i class="icon-user"></i></a>
+                        }
+                        <a href="/cart"><i class="icon-handbag"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> *@

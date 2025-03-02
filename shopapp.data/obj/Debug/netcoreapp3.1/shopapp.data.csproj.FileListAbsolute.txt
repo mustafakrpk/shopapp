@@ -1,0 +1,16 @@
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.data\bin\Debug\netcoreapp3.1\shopapp.data.deps.json
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.data\bin\Debug\netcoreapp3.1\shopapp.data.runtimeconfig.json
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.data\bin\Debug\netcoreapp3.1\shopapp.data.runtimeconfig.dev.json
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.data\bin\Debug\netcoreapp3.1\shopapp.data.dll
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.data\bin\Debug\netcoreapp3.1\shopapp.data.pdb
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.data\bin\Debug\netcoreapp3.1\shopapp.entity.dll
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.data\bin\Debug\netcoreapp3.1\shopapp.entity.pdb
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.data\obj\Debug\netcoreapp3.1\shopapp.data.csproj.AssemblyReference.cache
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.data\obj\Debug\netcoreapp3.1\shopapp.data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.data\obj\Debug\netcoreapp3.1\shopapp.data.AssemblyInfoInputs.cache
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.data\obj\Debug\netcoreapp3.1\shopapp.data.AssemblyInfo.cs
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.data\obj\Debug\netcoreapp3.1\shopapp.data.csproj.CoreCompileInputs.cache
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.data\obj\Debug\netcoreapp3.1\shopapp.data.csproj.CopyComplete
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.data\obj\Debug\netcoreapp3.1\shopapp.data.dll
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.data\obj\Debug\netcoreapp3.1\shopapp.data.pdb
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.data\obj\Debug\netcoreapp3.1\shopapp.data.genruntimeconfig.cache

@@ -1,0 +1,80 @@
+@model RegisterModel
+
+<!-- breadcrumb-area start -->
+<div class="breadcrumb-area section-ptb">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2 class="breadcrumb-title">Kayıt Ol</h2>
+                <ul class="breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="/">Anasayfa</a></li>
+                    <li class="breadcrumb-item active">Kayıt Ol</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb-area end -->
+
+<!-- main-content-wrap start -->
+<div class="main-content-wrap section-ptb login-and-register-page">
+    <div class="login-register-tab-list nav" role="tablist">
+        <a href="/account/login">
+            <h4>Giriş Yap</h4>
+        </a>
+        <a data-bs-toggle="tab" href="#lg2" aria-selected="true" role="tab" class="active">
+            <h4> Kayıt Ol </h4>
+        </a>
+    </div>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-7 col-md-12 m-auto">
+                <div class="login-register-wrapper">
+                    <div class="tab-content">
+                        <div id="lg2" class="tab-pane active">
+                            <div class="login-form-container">
+                                <div class="login-register-form">
+                                    <form asp-controller="Account" asp-action="Register" method="POST">
+                                        <div asp-validation-summary="All" class="text-danger"></div>
+                                        <div class="login-input-box">
+                                            <input type="text" asp-for="FirstName" placeholder="First Name"
+                                                class="form-control">
+                                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                                            <input type="text" asp-for="LastName" placeholder="Last Name"
+                                                class="form-control">
+                                            <span asp-validation-for="LastName" class="text-danger"></span>
+                                            <input type="text" asp-for="UserName" placeholder="User Name"
+                                                class="form-control">
+                                            <span asp-validation-for="UserName" class="text-danger"></span>
+                                            <input type="email" asp-for="Email" placeholder="Email"
+                                                class="form-control">
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                            <input type="password" asp-for="Password" placeholder="Password"
+                                                class="form-control">
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                            <input type="password" asp-for="RePassword" placeholder="Confirm Password"
+                                                class="form-control">
+                                            <span asp-validation-for="RePassword" class="text-danger"></span>
+                                        </div>
+                                        <div class="button-box">
+                                            <button class="register-btn btn btn-primary"
+                                                type="submit"><span>Register</span></button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- main-content-wrap end -->
+
+@section Scripts
+{
+    <script src="/modules/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+}

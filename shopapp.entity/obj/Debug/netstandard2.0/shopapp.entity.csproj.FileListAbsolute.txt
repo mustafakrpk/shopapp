@@ -1,0 +1,10 @@
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.entity\bin\Debug\netstandard2.0\shopapp.entity.deps.json
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.entity\bin\Debug\netstandard2.0\shopapp.entity.dll
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.entity\bin\Debug\netstandard2.0\shopapp.entity.pdb
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.entity\obj\Debug\netstandard2.0\shopapp.entity.csproj.AssemblyReference.cache
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.entity\obj\Debug\netstandard2.0\shopapp.entity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.entity\obj\Debug\netstandard2.0\shopapp.entity.AssemblyInfoInputs.cache
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.entity\obj\Debug\netstandard2.0\shopapp.entity.AssemblyInfo.cs
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.entity\obj\Debug\netstandard2.0\shopapp.entity.csproj.CoreCompileInputs.cache
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.entity\obj\Debug\netstandard2.0\shopapp.entity.dll
+C:\Users\MUSTAFA KIRPIK\shoopapp\shopapp.entity\obj\Debug\netstandard2.0\shopapp.entity.pdb

@@ -1,0 +1,233 @@
+<div class="header-area">
+    <!-- header-top start -->
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <p>Default welcome msg!</p>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="language-currency-wrapper">
+                        <ul>
+
+                            <li class="drodown-show">
+                                <a href="#"><img src="assets/images/icon/la-1.jpg" alt=""> English <i
+                                        class="ion-ios-arrow-down"></i></a>
+                                <ul class="open-dropdown">
+                                    <li class="active"><a href="#"><img src="assets/images/icon/la-1.jpg" alt="">
+                                            English </a></li>
+                                    <li><a href="#"><img src="assets/images/icon/la-2.jpg" alt=""> Français</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- header-top end -->
+
+    <div class="header-bottom-area header-sticky">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-2 col-md-5 col-5">
+                    <div class="logo">
+                        <a href="/"><img src="assets/images/logo/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-8 d-none d-lg-block">
+                    <div class="main-menu-area text-center">
+                        <nav class="main-navigation">
+                            <ul>
+                                <li class="active"><a href="/">Home</a></li>
+                                <li><a href="/products">Shop</a></li>
+
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <li><a href="/cart">Cart</a></li>
+                                    <li><a href="/orders">Orders</a></li>
+                                    @if (User.IsInRole("admin"))
+                                    {
+                                        <li><a href="/admin/products">Admin Products</a></li>
+                                        <li><a href="/admin/categories">Admin Categories</a></li>
+                                        <li class="nav-item">
+                                            <a href="/admin/role/list" class="nav-link">Roles</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/admin/user/list" class="nav-link">Users</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/orders" class="nav-link">Orders</a>
+                                        </li>
+
+                                    }
+                                }
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-7 col-7">
+                    <div class="right-blok-box d-flex align-items-center">
+                        <div class="search-wrap">
+                            <a href="#" class="trigger-search"><i class="icon-magnifier"></i></a>
+                        </div>
+                        <div class="user-wrap d-flex align-items-center">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a href="/account/manage" class="me-3 d-flex align-items-center">
+                                    <i class="icon-user"></i>
+                                    <span class="ms-2">@User.Identity.Name</span>
+                                </a>
+                                <a href="/account/logout" title="Logout">
+                                    <i class="icon-logout"></i>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="/account/login" class="me-3" title="Login">
+                                </a>
+                                <a href="/account/register" title="Giriş Yap /Kayıt Ol">
+                                    <i class="icon-user"></i>
+                                </a>
+                            }
+                        </div>
+                        <div class="shopping-cart-wrap">
+                            <a href="#"><i class="icon-handbag"></i> <span id="cart-total">0</span></a>
+                            <ul class="mini-cart">
+                                <!-- Dinamik ürünler burada yüklenecek -->
+                            </ul>
+                        </div>
+
+
+
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col">
+                <div class="mobile-menu d-block d-lg-none"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- main-search start -->
+<div class="main-search-active">
+    <div class="sidebar-search-icon">
+        <button class="search-close"><span class="icon-close"></span></button>
+    </div>
+    <div class="sidebar-search-input">
+        <form action="/search" method="get"> <!-- Form action eklendi -->
+            <div class="form-search">
+                <input id="search" name="q" class="input-text" value="" placeholder="Search entire store here ..."
+                    type="search">
+                <button class="search-btn" type="submit"> <!-- type="submit" eklendi -->
+                    <i class="icon-magnifier"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- main-search end -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Mini kartı güncelleme fonksiyonu
+        async function updateMiniCart() {
+            try {
+                const response = await fetch('/Cart/GetMiniCart');
+                const data = await response.json();
+
+                const cartTotal = document.getElementById('cart-total');
+                const miniCart = document.querySelector('.mini-cart');
+
+                // Toplam ürün sayısını güncelle
+                cartTotal.textContent = data.totalItems;
+
+                // Mini kart içeriğini temizle
+                miniCart.innerHTML = '';
+
+                if (data.items.length > 0) {
+                    data.items.forEach(item => {
+                        const cartItem = document.createElement('li');
+                        cartItem.classList.add('cart-item');
+                        cartItem.innerHTML = `
+                    <div class="cart-image">
+                        <a href="/product/${item.productId}">
+                            <img alt="${item.name}" src="/img/${item.imageUrl}">
+                        </a>
+                    </div>
+                    <div class="cart-title">
+                        <a href="/product/${item.productId}"><h4>${item.name}</h4></a>
+                        <span class="quantity">${item.quantity} ×</span>
+                        <div class="price-box">
+                            <span class="new-price">${item.price.toFixed(2)} ₺</span>
+                        </div>
+                        <a class="remove_from_cart" href="#" onclick="removeFromCart(${item.productId})">
+                            <i class="icon-trash icons"></i>
+                        </a>
+                    </div>
+                `;
+                        miniCart.appendChild(cartItem);
+                    });
+
+                    const subtotal = document.createElement('li');
+                    subtotal.classList.add('subtotal-titles');
+                    subtotal.innerHTML = `
+                <div class="subtotal-titles">
+                    <h3>Sub-Total :</h3>
+                    <span>${data.totalPrice.toFixed(2)} ₺</span>
+                </div>
+                `;
+
+                    const buttons = document.createElement('li');
+                    buttons.classList.add('mini-cart-btns');
+                    buttons.innerHTML = `
+                <div class="cart-btns">
+                    <a href="/cart">View cart</a>
+                    <a href="/checkout">Checkout</a>
+                </div>
+                `;
+
+                    miniCart.appendChild(subtotal);
+                    miniCart.appendChild(buttons);
+                } else {
+                    const emptyMessage = document.createElement('li');
+                    emptyMessage.innerHTML = '<h4>Your cart is empty.</h4>';
+                    miniCart.appendChild(emptyMessage);
+                }
+            } catch (error) {
+                console.error('Error updating mini cart:', error);
+            }
+        }
+
+        // Sepetten ürün silme fonksiyonu
+        window.removeFromCart = async (productId) => {
+            try {
+                const response = await fetch('/Cart/DeleteFromCart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    },
+                    body: JSON.stringify({ productId })
+                });
+
+                if (response.ok) {
+                    window.location.href = '/cart'; // Cart/Index sayfasına yönlendir
+                } else {
+                    const errorData = await response.json();
+                    alert(`Failed to remove item from cart: ${errorData.message}`);
+                }
+            } catch (error) {
+                console.error('Error removing item from cart:', error);
+                alert('An error occurred while removing the item.');
+            }
+        };
+
+        // Sayfa yüklendiğinde mini kartı güncelle
+        updateMiniCart();
+    });
+
+</script>

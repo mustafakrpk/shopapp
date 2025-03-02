@@ -1,0 +1,132 @@
+@model ProductDetailModel
+
+<!-- breadcrumb-area start -->
+<div class="breadcrumb-area section-ptb">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2 class="breadcrumb-title">Product Details</h2>
+                <!-- breadcrumb-list start -->
+                <ul class="breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active">Product Details</li>
+                </ul>
+                <!-- breadcrumb-list end -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb-area end -->
+
+
+<!-- main-content-wrap start -->
+<div class="main-content-wrap section-ptb product-details-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5 col-lg-7 col-md-6">
+                <div class="product-details-images">
+                    <div class="product_details_container">
+                        <!-- product_big_images start -->
+                        <div class="portfolio-full-image product-details-images">
+                            <div class="active product-image-position">
+                                <img src="~/img/@Model.Product.ImageUrl" alt="@Model.Product.Name" class="img-fluid">
+                            </div>
+                        </div>
+                        <!-- product_big_images end -->
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-7 col-lg-5 col-md-6">
+                <!-- product_details_info start -->
+                <div class="product_details_info">
+                    <h2>@Model.Product.Name</h2>
+                    <!-- pro_rating start -->
+                    <div class="pro_rating d-flex">
+
+                    </div>
+                    <!-- pro_rating end -->
+                    <!-- pro_details start -->
+                    <div class="pro_details">
+                        <p>@Model.Product.Description</p>
+                    </div>
+                    <!-- pro_details end -->
+                    <!-- pro_dtl_prize start -->
+
+                    <!-- pro_dtl_prize end -->
+                    <!-- pro_dtl_color start-->
+                    <div class="pro_dtl_color">
+                        <h2 class="title_2">Categories</h2>
+                        <ul class="pro_choose_color">
+                            @foreach (var item in Model.Categories)
+                            {
+                                <li>
+                                    <a asp-controller="shop" asp-action="list" asp-route-category="@item.Url">
+                                        @item.Name
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <!-- pro_dtl_color end-->
+                    <!-- product-quantity-action start -->
+                    <div class="product-quantity-action">
+                        <div class="prodict-statas"><span>Quantity :</span></div>
+                        <div class="product-quantity">
+                            <form asp-controller="Cart" asp-action="AddToCart" method="POST">
+                                <input type="hidden" name="productId" value="@Model.Product.ProductId">
+                                <div class="cart-plus-minus">
+                                    <input name="quantity" type="number" value="1" min="1">
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <!-- product-quantity-action end -->
+                    <!-- pro_dtl_btn start -->
+                    <ul class="pro_dtl_btn">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-cart-plus"></i> Add to Cart
+                        </button>
+
+                    </ul>
+                    <!-- pro_dtl_btn end -->
+                </div>
+                <!-- product_details_info end -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="product-details-tab mt--60">
+                    <ul role="tablist" class="mb--50 nav">
+                        <li class="active" role="presentation">
+                            <a data-bs-toggle="tab" role="tab" href="#description" class="active">Açıklama</a>
+                        </li>
+                        <li role="presentation">
+                            <a data-bs-toggle="tab" role="tab" href="#reviews">Özellikler</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="product_details_tab_content tab-content">
+                    <!-- Start Single Content -->
+                    <div class="product_tab_content tab-pane active" id="description" role="tabpanel">
+                        <div class="product_description_wrap">
+                            <div class="product_desc mb--30">
+                                <h2 class="title_3">Details</h2>
+                                <p>@Model.Product.Description</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Content -->
+                    <!-- Start Single Content -->
+
+                    <!-- End Single Content -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- main-content-wrap end -->

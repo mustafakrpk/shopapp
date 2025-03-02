@@ -1,0 +1,104 @@
+@model Product
+
+
+<!-- Ürün Listeleme Bölümü -->
+<div class="shop-product-wrapper">
+
+    <!-- Ürün Bilgileri -->
+    <div class="single-product-wrap">
+        <div class="product-image">
+            <a asp-controller="shop" asp-action="Details" asp-route-url="@Model.Url">
+                <img src="~/img/@Model.ImageUrl" alt="@Model.Name">
+            </a>
+            <div class="product-action">
+                <a href="#" class="wishlist"><i class="icon-heart"></i></a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form asp-controller="Cart" asp-action="AddToCart" method="POST" style="display: inline;">
+                        <input type="hidden" name="productId" value="@Model.ProductId">
+                        <input type="hidden" name="quantity" value="1">
+                        <button type="submit" class="btn btn-primary btn-sm add-to-cart" style="color: black;">
+                            <i class="icon-handbag"></i>
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <a href="/account/login" class="add-to-cart"><i class="icon-handbag"></i></a>
+                }
+                <a href="#" class="quick-view" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
+                    data-name="@Model.Name" data-image="@Url.Content("~/img/" + Model.ImageUrl)"
+                    data-description="@Model.Description" data-price="@Model.Price"
+                    data-href="@Url.Action("Details", "shop", new { url = Model.Url })">
+                    <i class="icon-shuffle"></i>
+                </a>
+            </div>
+        </div>
+        <div class="product-content">
+            <h3>
+                <a asp-controller="shop" asp-action="Details" asp-route-url="@Model.Url">@Model.Name</a>
+            </h3>
+            <div class="price-box">
+                <span class="new-price">@Model.Price ₺</span>
+            </div>
+        </div>
+        @* <div class="card-footer text-center">
+            <a asp-controller="shop" asp-action="Details" asp-route-url="@Model.Url"
+                class="btn btn-primary btn-sm">Details</a>
+        </div> *@
+    </div>
+</div>
+
+<!-- main-content-wrap end -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Product Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img id="modal-image" src="" alt="Product Image" class="img-fluid">
+                    </div>
+                    <div class="col-md-6">
+                        <h5 id="modal-name"></h5>
+                        <p id="modal-description"></p>
+                        <div class="price-box">
+                            <span id="modal-price" class="new-price"></span>
+                        </div>
+                        <div class="modal-footer mt-3">
+                            <a href="#" id="modal-details" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.getElementById('exampleModalCenter');
+        modal.addEventListener('show.bs.modal', (event) => {
+            const trigger = event.relatedTarget; // Quick View butonunu tetikleyen element
+            const name = trigger.getAttribute('data-name');
+            const image = trigger.getAttribute('data-image');
+            const description = trigger.getAttribute('data-description');
+            const price = trigger.getAttribute('data-price');
+            const detailsHref = trigger.getAttribute('data-href');
+
+            // Modal içeriğini doldur
+            document.getElementById('modal-name').textContent = name;
+            document.getElementById('modal-image').src = image;
+            document.getElementById('modal-description').textContent = description;
+            document.getElementById('modal-price').textContent = `₺${price}`;
+            document.getElementById('modal-details').href = detailsHref;
+        });
+    });
+</script>

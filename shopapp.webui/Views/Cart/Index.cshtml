@@ -1,0 +1,133 @@
+@model CartModel
+
+<!-- breadcrumb-area start -->
+<div class="breadcrumb-area section-ptb">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2 class="breadcrumb-title">Cart page</h2>
+                <!-- breadcrumb-list start -->
+                <ul class="breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active">Cart page</li>
+                </ul>
+                <!-- breadcrumb-list end -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb-area end -->
+
+<!-- main-content-wrap start -->
+<div class="main-content-wrap section-ptb cart-page">
+    <div class="container">
+        @if (Model.CartItems.Count == 0)
+        {
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-warning text-center">Sepetinizde ürün yok.</div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <form id="cartForm" class="cart-table">
+                <div class="table-content table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="plantmore-product-thumbnail">Images</th>
+                                <th class="cart-product-name">Product</th>
+                                <th class="plantmore-product-price">Unit Price</th>
+                                <th class="plantmore-product-quantity">Quantity</th>
+                                <th class="plantmore-product-subtotal">Total</th>
+                                <th class="plantmore-product-remove">Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.CartItems)
+                            {
+                                <tr data-product-id="@item.ProductId" data-price="@item.Price">
+                                    <td class="plantmore-product-thumbnail">
+                                        <a href="#">
+                                            <img src="~/img/@item.ImageUrl" alt="@item.Name" width="80">
+                                        </a>
+                                    </td>
+                                    <td class="cart-product-name">
+                                        <a href="#">@item.Name</a>
+                                    </td>
+                                    <td class="plantmore-product-price">
+                                        <span class="amount">@item.Price.ToString("c")</span>
+                                    </td>
+                                    <td class="plantmore-product-quantity">
+                                        <input type="number" min="1" class="quantity-input" value="@item.Quantity"
+                                            onchange="updateQuantity(@item.ProductId, this.value)">
+                                    </td>
+                                    <td class="plantmore-product-subtotal">
+                                        <span class="amount">@((item.Quantity * item.Price).ToString("c"))</span>
+                                    </td>
+                                    <td class="plantmore-product-remove">
+                                        <form asp-controller="Cart" asp-action="DeleteFromCart" method="post">
+                                            <input type="hidden" name="productId" value="@item.ProductId">
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="ion-close"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="coupon-all">
+                            <div class="coupon2">
+                                <a href="/" class="btn continue-btn">Continue Shopping</a>
+                            </div>
+                            <div class="coupon">
+                                <h3>Coupon</h3>
+                                <p>Enter your coupon code if you have one.</p>
+                                <input id="coupon_code" class="input-text" name="coupon_code" value=""
+                                    placeholder="Coupon code" type="text">
+                                <button class="btn btn-primary">Apply coupon</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ml-auto">
+                        <div class="cart-page-total">
+                            <h2>Cart totals</h2>
+                            <ul>
+                                <li>Subtotal <span id="cart-subtotal">@Model.TotalPrice().ToString("c")</span></li>
+                                <li>Total <span id="cart-total">@Model.TotalPrice().ToString("c")</span></li>
+                            </ul>
+                            <a href="/checkout" class="proceed-checkout-btn">Proceed to checkout</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+</div>
+<!-- main-content-wrap end -->
+
+<script>
+    function updateQuantity(productId, quantity) {
+        fetch('/Cart/UpdateQuantity', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+            },
+            body: JSON.stringify({ productId: productId, quantity: parseInt(quantity) })
+        })
+            .then(response => {
+                if (response.ok) {
+                    location.reload(); // Sayfayı yeniden yükler
+                } else {
+                    alert('Failed to update quantity.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>

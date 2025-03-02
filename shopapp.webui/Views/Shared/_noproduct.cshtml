@@ -1,0 +1,11 @@
+@if (Model.Products == null || !Model.Products.Any())
+{
+    @await Html.PartialAsync("_NoProduct")
+}
+else
+{
+    @foreach (var product in Model.Products)
+    {
+        <div>@product.Name</div>
+    }
+}
